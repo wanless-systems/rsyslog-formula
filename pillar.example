@@ -7,6 +7,7 @@ rsyslog:
     - log2.example.com                    # The single 'target' directive takes precendence over this however.
 
   protocol: udp                           # protocol to use to send to target
+  listenudpprt: 10514                     # specify udp listen port ($UDPServerRun)
   listentcp: true                         # omit to disable listening on tcp port
   listentcpprt: 10514                     # specify tcp listen port ($InputTCPServerRun)
   listenudp: true                         # omit to disable listening on udp port

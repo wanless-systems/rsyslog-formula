@@ -25,7 +25,7 @@ $MarkMessagePeriod   {{ config.markmessageperiod|default('3600') }}
 {% if config.listenudp|default(false) -%}
 # provides UDP syslog reception
 $ModLoad imudp
-$UDPServerRun 514
+$UDPServerRun {{ config.listenudpprt|default('514') }}
 {%- endif %}
 
 {% if config.listentcp|default(false) -%}
