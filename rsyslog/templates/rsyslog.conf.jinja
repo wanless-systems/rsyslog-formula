@@ -69,11 +69,6 @@ $PrivDropToUser {{ config.get('priv_drop_to_user', config.get('fileowner', 'root
 $PrivDropToGroup {{ config.get('priv_drop_to_group', config.get('filegroup', 'adm'))}}
 {%- endif %}
 
-#
-# Include all config files in /etc/rsyslog.d/
-#
-$IncludeConfig /etc/rsyslog.d/*.conf
-
 {% if config.target|default(false) %}
 {% if config.protocol|default('udp') == 'tcp' %}
 *.* @@{{ config.target }}
@@ -111,3 +106,13 @@ $IMJournalStateFile imjournal.state
 # # but it also prevents a potential huge spike in resource utilization.
 # $IMJournalIgnorePreviousMessages on
 {%- endif %}
+
+#
+# Include all config files in /etc/rsyslog.d/
+# Include these settings only for locally generated logs. Logs generated
+# outside of this box should go to the remote facilities if they're availble
+
+# See: https://serverfault.com/questions/584296/rsyslog-filter-by-client
+:source , !isequal , "syslog1" ~
+
+$IncludeConfig /etc/rsyslog.d/*.conf
