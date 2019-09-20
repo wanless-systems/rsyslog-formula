@@ -115,7 +115,7 @@ $IMJournalStateFile imjournal.state
 
 # See: https://serverfault.com/questions/584296/rsyslog-filter-by-client
 :source , !isequal , "syslog1" ~
-{% endif % }
+{% endif %}
 
 # Include all config files in /etc/rsyslog.d/
 $IncludeConfig /etc/rsyslog.d/*.conf
