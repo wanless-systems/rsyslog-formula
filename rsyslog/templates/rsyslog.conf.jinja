@@ -107,12 +107,15 @@ $IMJournalStateFile imjournal.state
 # $IMJournalIgnorePreviousMessages on
 {%- endif %}
 
-#
-# Include all config files in /etc/rsyslog.d/
+{% if config.dropremotebeforeincludes %}
+# Drop non-locally generated packets so we don't log remote logs to the default
+# logging locations. They're for local logs only
 # Include these settings only for locally generated logs. Logs generated
 # outside of this box should go to the remote facilities if they're availble
 
 # See: https://serverfault.com/questions/584296/rsyslog-filter-by-client
 :source , !isequal , "syslog1" ~
+{% endif % }
 
+# Include all config files in /etc/rsyslog.d/
 $IncludeConfig /etc/rsyslog.d/*.conf
