@@ -107,7 +107,7 @@ $IMJournalStateFile imjournal.state
 # $IMJournalIgnorePreviousMessages on
 {%- endif %}
 
-{% if config.dropremotebeforeincludes %}
+{% if config.dropremotebeforeincludes is defined %}
 # Drop non-locally generated packets so we don't log remote logs to the default
 # logging locations. They're for local logs only
 # Include these settings only for locally generated logs. Logs generated
